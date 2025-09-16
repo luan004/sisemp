@@ -1,0 +1,19 @@
+{
+    "name": "luang/sloo-api",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Luan Gabriel",
+            "email": "38366327+luan004@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "illuminate/database": "^10.48",
+        "nesbot/carbon": "^2.73"
+    }
+}

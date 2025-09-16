@@ -1,0 +1,14 @@
+<div ng-controller="LoginController as ctrl" class="h-100">
+    <div class="d-flex h-100">
+        <div class="m-auto p-4 shadow-md rounded-3 bg-body-secondary gap-2 d-flex flex-column">
+            <form name="loginForm" ng-submit="ctrl.submit()">
+                <div class="card">
+                    <input type="text" class=" form-control border-0" placeholder="Usuário" ng-model="ctrl.user.username" required>
+                    <input type="password" class="form-control border-0" placeholder="Senha" ng-model="ctrl.user.password" required>
+                    <span class="alert alert-danger small p-1 m-0 animation-fade" ng-show="ctrl.invalid">Usuário ou senha inválida</span>
+                    <input type="submit" class="btn btn-primary shadow-sm" ng-disabled="loginForm.$invalid">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

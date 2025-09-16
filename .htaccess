@@ -1,0 +1,25 @@
+RewriteEngine On
+
+# Redireciona todas as rotas que começam com /api para /api/index.php
+# Captura as requisições na api e direciona para o index.php onde elas serão tratadas de acordo com a rota
+RewriteCond %{REQUEST_URI} ^/api
+RewriteRule ^api/(.*)$ api/index.php [L,QSA]
+
+# Permite acessar arquivos dentro de /public
+# Arquivos estáticos como arquivos de estilização, javascript e etc podem ser acessados sem precisar incluir /public na URL
+RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f
+RewriteRule ^(.*)$ /public/$1 [L]
+
+# Retorna 404 para qualquer URL que contenha uma extensão e não seja um arquivo real
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} \.[a-zA-Z0-9]{1,}$ [NC]
+RewriteRule ^(.*)$ - [R=404,L]
+
+# Redireciona para /public/index.html
+# Se não cair nas condições anteriores, então redireciona para o index.html onde a SPA será carregada de acordo com a rota
+RewriteCond %{THE_REQUEST} \s/public/ [OR]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ public/index.html [L,QSA]
+
+# Força o apache a entregar o header authorization
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1

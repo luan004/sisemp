@@ -1,0 +1,24 @@
+{
+    "GET": {
+
+    },
+    "POST": {
+        "/auth/login": {
+            "handler": "AuthController@login",
+            "access": "public"
+        },
+        "/auth/refresh": {
+            "handler": "AuthController@refresh",
+            "access": "private"
+        }
+    },
+    "PUT": {
+
+    },
+    "DELETE": {
+
+    },
+    "PATCH": {
+
+    }
+}
