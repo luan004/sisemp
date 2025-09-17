@@ -1,34 +1,7 @@
-/* .animation-fade */
-
-.animation-fade {
-    transition: opacity 0.5s ease-in-out;
+.zoom-hover {
+  transition: 0.3s;
 }
 
-.animation-fade.ng-hide {
-    opacity: 0;
+.zoom-hover:hover {
+  transform: scale(1.02);
 }
-
-.animation-fade.ng-hide-remove,
-.animation-fade.ng-hide-add {
-    display: block !important;
-}
-
-/* .animation-slidedown */
-
-.animation-slidedown {
-    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-  }
-  
-  .animation-slidedown.ng-hide-remove {
-    max-height: 200px; /* Ajuste conforme necessário */
-    opacity: 1;
-  }
-  
-  .animation-slidedown.ng-hide-add {
-    max-height: 0;
-    opacity: 0;
-  }
-  

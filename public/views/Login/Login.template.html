@@ -1,14 +1,47 @@
 <div ng-controller="LoginController as ctrl" class="h-100">
     <div class="d-flex h-100">
-        <div class="m-auto p-4 shadow-md rounded-3 bg-body-secondary gap-2 d-flex flex-column">
-            <form name="loginForm" ng-submit="ctrl.submit()">
-                <div class="card">
-                    <input type="text" class=" form-control border-0" placeholder="Usuário" ng-model="ctrl.user.username" required>
-                    <input type="password" class="form-control border-0" placeholder="Senha" ng-model="ctrl.user.password" required>
-                    <span class="alert alert-danger small p-1 m-0 animation-fade" ng-show="ctrl.invalid">Usuário ou senha inválida</span>
-                    <input type="submit" class="btn btn-primary shadow-sm" ng-disabled="loginForm.$invalid">
+        <div class="row w-100 m-0">
+            <div class="col-6 d-none d-lg-block bg-primary bg-gradient"></div>
+            <div class="col-lg-6 d-flex bg-body-tertiary">
+                <div class="m-auto">
+                    <form name="loginForm" ng-submit="ctrl.submit()">
+                        <div class="row g-3 m-4" style="max-width: 400px;">
+                            <div class="col-12">
+                                <h5>
+                                    Entrar no bagulho ai
+                                </h5>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" ng-required="true" name="username" ng-model="ctrl.form.username" class="form-control shadow-sm" placeholder="">
+                                    <label>Usuário</label>
+                                </div>  
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="password" ng-required name="password" ng-model="ctrl.form.password" class="form-control shadow-sm" placeholder="">
+                                    <label>Senha</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <input type="submit" class="btn py-2 bg-gradient btn-primary w-100 shadow-sm border border-dark border-opacity-25" ng-disabled="loginForm.$invalid" ng-class="{
+                                    'is-invalid': ctrl.states.isFailed,
+                                    'zoom-hover': !loginForm.$invalid
+                                }">
+                                <span class="invalid-feedback">O usuário ou senha estão incorretos.</span>
+                            </div>
+                            <div class="col-12 d-flex">
+                                <span class="mx-auto fw-bold opacity-75 py-1 small">OU</span>
+                            </div>
+                            <div class="col-12">
+                                <button ng-disabled="false" class="zoom-hover btn btn-secondary py-2 bg-gradient w-100 shadow-sm border border-dark border-opacity-25" ng-disabled="loginForm.$invalid">
+                                    Entrar com o SUAP
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
