@@ -13,9 +13,9 @@ const routes =
         title: "Login"
     },
     {
-        route: "/login/:id",
-        view: "Login/User",
+        route: "/Cadastro-material",
+        view: "Material_reg",
         showInSidebar: false,
-        title: "User"
+        title: "Cadastro material"
     }
 ]
