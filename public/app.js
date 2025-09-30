@@ -42,6 +42,31 @@ angular.module('App').run(function ($rootScope, $route) {
     });
 });
 
+angular.module('App').directive('clickOutside', function($document) {
+  return {
+    restrict: 'A', // Attribute directive
+    link: function(scope, element, attrs) {
+      function onClick(event) {
+        // Check if the clicked element is outside the directive's element
+        if (!element[0].contains(event.target)) {
+          // If outside, execute the expression provided in the directive's attribute
+          scope.$apply(function() {
+            scope.$eval(attrs.clickOutside);
+          });
+        }
+      }
+
+      // Add a click listener to the document
+      $document.on('click', onClick);
+
+      // Clean up the event listener when the scope is destroyed
+      scope.$on('$destroy', function() {
+        $document.off('click', onClick);
+      });
+    }
+  };
+});
+
 const getView = function (route) {
     let component = route.view.split('/').pop();
 
