@@ -1,0 +1,207 @@
+<div ng-controller="ProfileController as ctrl" class="h-100">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-xl-7">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+          <!-- Header do Perfil -->
+          <div
+            class="bg-primary bg-gradient text-center py-5 position-relative"
+          >
+            <div
+              class="position-absolute top-100 start-50 translate-middle"
+              style="z-index: 9999"
+            >
+              <div
+                class="bg-white rounded-circle p-3 shadow-lg d-flex align-items-center justify-content-center"
+                style="
+                  position: relative;
+                  z-index: 10000;
+                  width: 80px;
+                  height: 80px;
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  width="48"
+                  height="48"
+                  aria-hidden="true"
+                  focusable="false"
+                  style="display: block; fill: #000000"
+                >
+                  <path
+                    d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Corpo do Perfil -->
+          <div class="card-body px-4 px-md-5 pt-5 mt-5">
+            <!-- Modo Visualização -->
+            <div ng-if="!ctrl.states.isEditing">
+              <div class="bg-light rounded-3 p-4 mb-4">
+                <h5 class="text-primaryfw-bold mb-4">
+                  <i class="bi bi-info-circle me-2"></i>
+                  Informações Pessoais
+                </h5>
+
+                <!-- Nome -->
+                <div class="bg-white rounded-3 p-3 mb-3 shadow-sm">
+                  <div class="d-flex align-items-center">
+                    <div
+                      class="bg-primary bg-gradient text-white rounded-2 p-2 me-3"
+                    >
+                      <i class="bi bi-person fs-5"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                      <small
+                        class="text-muted text-uppercase fw-semibold d-block"
+                        style="font-size: 0.75rem"
+                        >Nome Completo</small
+                      >
+                      <span class="fw-semibold">{{ctrl.user.name}}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- E-mail -->
+                <div class="bg-white rounded-3 p-3 mb-3 shadow-sm">
+                  <div class="d-flex align-items-center">
+                    <div
+                      class="bg-primary bg-gradient text-white rounded-2 p-2 me-3"
+                    >
+                      <i class="bi bi-envelope fs-5"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                      <small
+                        class="text-muted text-uppercase fw-semibold d-block"
+                        style="font-size: 0.75rem"
+                        >E-mail</small
+                      >
+                      <span class="fw-semibold">{{ctrl.user.email}}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- RA -->
+                <div class="bg-white rounded-3 p-3 shadow-sm">
+                  <div class="d-flex align-items-center">
+                    <div
+                      class="bg-primary bg-gradient text-white rounded-2 p-2 me-3"
+                    >
+                      <i class="bi bi-card-text fs-5"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                      <small
+                        class="text-muted text-uppercase fw-semibold d-block"
+                        style="font-size: 0.75rem"
+                        >Registro Acadêmico</small
+                      >
+                      <span class="fw-semibold">{{ctrl.user.ra}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Botões de Ação -->
+              <div class="d-grid gap-3">
+                <button
+                  class="btn btn-primary btn-lg fw-semibold shadow-sm"
+                  ng-click="ctrl.startEdit()"
+                >
+                  <i class="bi bi-pencil-square me-2"></i>
+                  Editar Perfil
+                </button>
+                <button
+                  class="btn btn-danger btn-lg fw-semibold shadow-sm"
+                  ng-click="ctrl.logout()"
+                >
+                  <i class="bi bi-box-arrow-right me-2"></i>
+                  Sair da Conta
+                </button>
+              </div>
+            </div>
+
+            <!-- Modo Edição -->
+            <div ng-if="ctrl.states.isEditing">
+              <div class="bg-light rounded-3 p-4 mb-4">
+                <h5 class="text-primary fw-bold mb-4">
+                  <i class="bi bi-pencil-square me-2"></i>
+                  Editar Informações
+                </h5>
+
+                <!-- Nome -->
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">
+                    <i class="bi bi-person me-1"></i>
+                    Nome Completo
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    ng-model="ctrl.editForm.name"
+                    placeholder="Digite seu nome completo"
+                  />
+                </div>
+
+                <!-- E-mail -->
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">
+                    <i class="bi bi-envelope me-1"></i>
+                    E-mail
+                  </label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    ng-model="ctrl.editForm.email"
+                    placeholder="Digite seu e-mail"
+                  />
+                </div>
+
+                <!-- RA -->
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">
+                    <i class="bi bi-card-text me-1"></i>
+                    Registro Acadêmico
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    ng-model="ctrl.editForm.ra"
+                    placeholder="Digite seu RA"
+                  />
+                </div>
+              </div>
+
+              <!-- Botões de Edição -->
+              <div class="d-grid gap-3">
+                <button
+                  class="btn btn-success btn-lg fw-semibold shadow-sm"
+                  ng-click="ctrl.saveProfile()"
+                  ng-disabled="ctrl.states.isSaving"
+                >
+                  <i class="bi bi-check-circle me-2"></i>
+                  <span ng-if="!ctrl.states.isSaving">Salvar Alterações</span>
+                  <span ng-if="ctrl.states.isSaving">
+                    <span class="spinner-border spinner-border-sm me-2"></span>
+                    Salvando...
+                  </span>
+                </button>
+                <button
+                  class="btn btn-secondary btn-lg fw-semibold shadow-sm"
+                  ng-click="ctrl.cancelEdit()"
+                  ng-disabled="ctrl.states.isSaving"
+                >
+                  <i class="bi bi-x-circle me-2"></i>
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
