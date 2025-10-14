@@ -1,14 +1,20 @@
 <div ng-controller="LoginController as ctrl" class="h-100">
     <div class="d-flex h-100">
         <div class="row w-100 m-0">
-            <div class="col-6 d-none d-lg-block bg-primary bg-gradient"></div>
+            <div class="col-6 d-none d-flex d-lg-block bg-success bg-gradient">
+                <div class="h-100 d-flex">
+                    <span class="m-auto fs-1 bg-dark rounded-3 shadow bg-gradient px-2 py-0 text-white fw-bold">
+                        SISEMP
+                    </span>
+                </div>
+            </div>
             <div class="col-lg-6 d-flex bg-body-tertiary">
                 <div class="m-auto">
                     <form name="loginForm" ng-submit="ctrl.submit()">
                         <div class="row g-3 m-4" style="max-width: 400px;">
                             <div class="col-12">
                                 <h5>
-                                    Entrar no bagulho ai
+                                    Entrar
                                 </h5>
                             </div>
                             <div class="col-12">
@@ -24,7 +30,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <input type="submit" class="btn py-2 bg-gradient btn-primary w-100 shadow-sm border border-dark border-opacity-25" ng-disabled="loginForm.$invalid" ng-class="{
+                                <input type="submit" class="btn py-2 bg-gradient btn-success w-100 shadow-sm border border-dark border-opacity-25" ng-disabled="loginForm.$invalid" ng-class="{
                                     'is-invalid': ctrl.states.isFailed,
                                     'zoom-hover': !loginForm.$invalid
                                 }">
