@@ -1,15 +1,15 @@
 <div ng-controller="ProfileController as ctrl" class="h-100">
-  <div class="container py-5">
+  <side-bar>
+    <div class="container py-5">
     <div class="row justify-content-center">
       <div class="col-lg-8 col-xl-7">
         <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
           <!-- Header do Perfil -->
           <div
-            class="bg-primary bg-gradient text-center py-5 position-relative"
+            class="bg-success bg-gradient text-center py-5 position-relative"
           >
             <div
               class="position-absolute top-100 start-50 translate-middle"
-              style="z-index: 9999"
             >
               <div
                 class="bg-white rounded-circle p-3 shadow-lg d-flex align-items-center justify-content-center"
@@ -38,20 +38,20 @@
           </div>
 
           <!-- Corpo do Perfil -->
-          <div class="card-body px-4 px-md-5 pt-5 mt-5">
+          <div class="card-body p-3">
             <!-- Modo Visualização -->
             <div ng-if="!ctrl.states.isEditing">
-              <div class="bg-light rounded-3 p-4 mb-4">
-                <h5 class="text-primaryfw-bold mb-4">
+              <div class="rounded-3 p-4 mb-4">
+                <h5 class="text-success fw-bold mb-4">
                   <i class="bi bi-info-circle me-2"></i>
                   Informações Pessoais
                 </h5>
 
                 <!-- Nome -->
-                <div class="bg-white rounded-3 p-3 mb-3 shadow-sm">
+                <div class="bg-body-secondary border rounded-3 p-3 mb-3 shadow-sm">
                   <div class="d-flex align-items-center">
                     <div
-                      class="bg-primary bg-gradient text-white rounded-2 p-2 me-3"
+                      class="bg-success bg-gradient text-white rounded-2 p-2 me-3"
                     >
                       <i class="bi bi-person fs-5"></i>
                     </div>
@@ -67,10 +67,10 @@
                 </div>
 
                 <!-- E-mail -->
-                <div class="bg-white rounded-3 p-3 mb-3 shadow-sm">
+                <div class="bg-body-secondary border rounded-3 p-3 mb-3 shadow-sm">
                   <div class="d-flex align-items-center">
                     <div
-                      class="bg-primary bg-gradient text-white rounded-2 p-2 me-3"
+                      class="bg-success bg-gradient text-white rounded-2 p-2 me-3"
                     >
                       <i class="bi bi-envelope fs-5"></i>
                     </div>
@@ -86,10 +86,10 @@
                 </div>
 
                 <!-- RA -->
-                <div class="bg-white rounded-3 p-3 shadow-sm">
+                <div class="bg-body-secondary border rounded-3 p-3 shadow-sm">
                   <div class="d-flex align-items-center">
                     <div
-                      class="bg-primary bg-gradient text-white rounded-2 p-2 me-3"
+                      class="bg-success bg-gradient text-white rounded-2 p-2 me-3"
                     >
                       <i class="bi bi-card-text fs-5"></i>
                     </div>
@@ -108,7 +108,7 @@
               <!-- Botões de Ação -->
               <div class="d-grid gap-3">
                 <button
-                  class="btn btn-primary btn-lg fw-semibold shadow-sm"
+                  class="btn btn-success btn-lg fw-semibold shadow-sm"
                   ng-click="ctrl.startEdit()"
                 >
                   <i class="bi bi-pencil-square me-2"></i>
@@ -127,7 +127,7 @@
             <!-- Modo Edição -->
             <div ng-if="ctrl.states.isEditing">
               <div class="bg-light rounded-3 p-4 mb-4">
-                <h5 class="text-primary fw-bold mb-4">
+                <h5 class="text-success fw-bold mb-4">
                   <i class="bi bi-pencil-square me-2"></i>
                   Editar Informações
                 </h5>
@@ -204,4 +204,5 @@
       </div>
     </div>
   </div>
+  </side-bar>
 </div>
