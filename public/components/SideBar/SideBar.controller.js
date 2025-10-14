@@ -16,6 +16,11 @@ angular.module('App').component('sideBar', {
                 title: "Início",
                 url: "/",
                 icon: "fa fa-home"
+            },
+            {
+                title: "Meu perfil",
+                url: "/profile",
+                icon: "fa fa-user"
             }
         ];
 

@@ -1,0 +1,84 @@
+<div ng-controller="ProdutoController as ctrl" class="h-100 bg-body-tertiary">
+    <div class="container-fluid py-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8 col-xl-6">
+                <!-- Alerta de Sucesso -->
+                <div ng-show="ctrl.states.cadastroSucesso" class="alert alert-success alert-dismissible fade show shadow-sm mb-3" role="alert">
+                    <strong>Sucesso!</strong> Material cadastrado com sucesso.
+                    <button type="button" class="btn-close" ng-click="ctrl.states.cadastroSucesso = false"></button>
+                </div>
+
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <h5 class="mb-4">Cadastro de Materiais</h5>
+                        
+                        <form name="produtoForm" ng-submit="ctrl.submit()">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" ng-required="true" name="nome" ng-model="ctrl.form.nome" class="form-control" placeholder="">
+                                        <label>Nome do Material</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea ng-required="true" name="descricao" ng-model="ctrl.form.descricao" class="form-control" placeholder="" style="height: 100px;"></textarea>
+                                        <label>Descrição</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" ng-required="true" name="preco" ng-model="ctrl.form.preco" class="form-control" placeholder="" step="0.01" min="0">
+                                        <label>Preço (R$)</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" ng-required="true" name="estoque" ng-model="ctrl.form.estoque" class="form-control" placeholder="" min="0">
+                                        <label>Quantidade em Estoque</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <select ng-required="true" name="categoria" ng-model="ctrl.form.categoria" class="form-select">
+                                            <option value="">Selecione...</option>
+                                            <option value="eletronicos">Eletrônicos</option>
+                                            <option value="esporte">Esporte</option>
+                                            <option value="utilitários">Utilitários</option>
+                                            <option value="outros">Outros</option>
+                                        </select>
+                                        <label>Categoria</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="ativo" ng-model="ctrl.form.ativo" class="form-check-input" id="materialAtivo">
+                                        <label class="form-check-label" for="materialAtivo">
+                                            Material Ativo
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12 mt-4">
+                                    <div class="d-flex gap-2">
+                                        <button type="submit" class="btn btn-primary flex-fill" ng-disabled="produtoForm.$invalid">
+                                            Cadastrar Material
+                                        </button>
+                                        <button type="button" class="btn btn-secondary flex-fill">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
