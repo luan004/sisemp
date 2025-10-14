@@ -16,11 +16,6 @@ angular.module('App').component('sideBar', {
                 title: "Início",
                 url: "/",
                 icon: "fa fa-home"
-            },
-            {
-                title: "Teste",
-                url: "/teste",
-                icon: "fa fa-home"
             }
         ];
 
