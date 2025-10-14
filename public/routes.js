@@ -23,4 +23,10 @@ const routes = [
     showInSidebar: false,
     title: "Profile",
   },
+  {
+    route: "/cadastro-material",
+    view: "CadastroMaterial",
+    showInSidebar: false,
+    title: "CadastroMaterial"
+  }
 ];
