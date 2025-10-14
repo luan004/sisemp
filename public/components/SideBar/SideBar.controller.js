@@ -21,6 +21,11 @@ angular.module('App').component('sideBar', {
                 title: "Meu perfil",
                 url: "/profile",
                 icon: "fa fa-user"
+            },
+            {
+                title:  "Cadastro de Materiais",
+                url: "/cadastro-material",
+                icon: "fa fa-box"
             }
         ];
 
