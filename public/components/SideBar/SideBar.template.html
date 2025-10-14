@@ -1,33 +1,17 @@
 <style>
 
     #side_nav {
-        background: #000;
         min-width: 250px;
         max-width: 250px;
         transition: all 0.3s;
     }
 
-    .content {
-        min-height: 100vh;
-        width: 100%;
+    .sidebar-hide-btn {
+        display: none;
     }
 
-    hr.h-color {
-        background: #eee;
-    }
-
-    .sidebar li.active {
-        background: #eee;
-        border-radius: 8px;
-    }
-
-    .sidebar li.active a,
-    .sidebar li.active a:hover {
-        color: #000;
-    }
-
-    .sidebar li a {
-        color: #fff;
+    .sidebar-hide-btn-2 {
+        display: none;
     }
 
     @media(max-width: 767px) {
@@ -36,78 +20,55 @@
             position: absolute;
             min-height: 100vh;
             z-index: 1;
-
         }
+
+        .sidebar-hide-btn-2 {
+            display: block;
+        }
+        
 
         #side_nav.active {
             margin-left: 0;
+        }
+
+        .sidebar-hide-btn {
+            display: block;
         }
     }
 </style>
 
 <div class="main-container d-flex">
-    <div class="sidebar" ng-class="{
-        'active': $ctrl.states.isActive
-    }" id="side_nav">
-        <div class="header-box px-2 pt-3 pb-4 d-flex justify-content-between">
-            <h1 class="fs-4">
-                <span class="bg-white text-dark rounded shadow px-2 me-2">CL</span>
-                <span class="text-white">Coding League</span>
-            </h1>
-            <button class="btn d-md-none d-block close-btn px-1 py-0 text-white" ng-click="$ctrl.states.isActive = false">
-                <i class="fal fa-stream"></i>
-            </button>
-        </div>
-
-        <ul class="list-unstyled px-2">
-            <li ng-class="{
-                'active': $ctrl.helpers.itemIsActive(item.url)
-            }" ng-repeat="item in $ctrl.items">
-                <a href="{{item.url}}" class="text-decoration-none px-3 py-2 d-block">
+    <div class="sidebar bg-dark shadow p-3" ng-class="{ 'active': $ctrl.states.isActive }" id="side_nav">
+        <div class="row g-2">
+            <div class="col-12 sidebar-hide-btn-2">
+                <div class="d-flex" ng-click="$ctrl.states.isActive = false">
+                    <button class="ms-auto btn btn-secondary text-start">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-12" ng-repeat="item in $ctrl.items">
+                <a class="btn btn-success w-100 text-start" href="{{item.url}}"  ng-class="{ 'active': $ctrl.helpers.itemIsActive(item.url) }">
                     <i class="{{item.icon}}"></i>
                     {{item.title}}
                 </a>
-            </li>
-
-        </ul>
-
-        <hr class="h-color mx-2">
-
-        <ul class="list-unstyled px-2">
-            <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-bars"></i>
-                    Configurações</a></li>
-
-        </ul>
-
+            </div>
+        </div>
     </div>
-    <div class="content">
-        <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="content" style="min-height: 100vh; width: 100%;">
+        <nav class="navbar bg-success bg-gradient border-bottom border-opacity-25 border-dark shadow">
             <div class="container-fluid">
-                <div class="d-flex justify-content-between d-md-none d-block">
-                    <button class="btn px-1 py-0 open-btn me-2" ng-click="$ctrl.states.isActive = true"><i class="fal fa-stream"></i></button>
-                    <a class="navbar-brand fs-4" href="#"><span
-                            class="bg-dark rounded px-2 py-0 text-white">CL</span></a>
-
-                </div>
-                <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fal fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                    <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Profile</a>
-                        </li>
-
-                    </ul>
-
+                <div class="d-flex">
+                    <button class="sidebar-hide-btn btn rounded-circle" ng-click="$ctrl.states.isActive = true">
+                        <i class="fa-solid fa-bars fs-3 m-auto"></i>
+                    </button>
+                    <a class="navbar-brand fs-4" href="#">
+                        <span class="bg-dark rounded px-2 py-0 text-white fw-bold">SISEMP</span>
+                    </a>
                 </div>
             </div>
         </nav>
 
-        <div class="dashboard-content px-3 pt-4">
-            <h5>CONTEUDO AQUI</h5>
-        </div>
+        <div class="dashboard-content px-3 pt-4" ng-transclude></div>
     </div>
 </div>
