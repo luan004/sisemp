@@ -1,25 +1,42 @@
-angular.module('App').controller('LoginController', function ($location) {
-
-    this.form = {
-        username: '',
-        password: ''
-    }
-
-    this.states = {
-        isFailed: false
-    }
+angular.module('App').controller('ProdutoController', function($timeout) {
+    var ctrl = this;
     
-    this.submit = function () {
-        this.states.isFailed = false
-
-        /**
-         * Falha usuário e senha incorretos
-         */
-        if (this.form.username != 'admin' || this.form.password != 'admin') {
-            this.states.isFailed = true
-            return;
-        }
-
-        $location.url('/')
-    }
+    // Inicializa o formulário
+    ctrl.form = {
+        nome: '',
+        descricao: '',
+        preco: null,
+        estoque: null,
+        categoria: '',
+        ativo: false
+    };
+    
+    // Inicializa os estados - começa como false para não mostrar o alerta
+    ctrl.states = {
+        cadastroSucesso: false
+    };
+    
+    // Função chamada ao submeter o formulário
+    ctrl.submit = function() {
+        // Aqui você faria a chamada para API/backend
+        console.log('Material cadastrado:', ctrl.form);
+        
+        // Mostra o alerta de sucesso
+        ctrl.states.cadastroSucesso = true;
+        
+        // Esconde o alerta após 4 segundos
+        $timeout(function() {
+            ctrl.states.cadastroSucesso = false;
+        }, 4000);
+        
+        // Limpa o formulário após cadastro
+        ctrl.form = {
+            nome: '',
+            descricao: '',
+            preco: null,
+            estoque: null,
+            categoria: '',
+            ativo: false
+        };
+    };
 });
