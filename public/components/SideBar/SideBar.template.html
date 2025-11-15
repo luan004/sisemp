@@ -1,8 +1,8 @@
 <style>
 
     #side_nav {
-        min-width: 250px;
-        max-width: 250px;
+        min-width: 200px;
+        max-width: 200px;
         transition: all 0.3s;
     }
 
@@ -16,7 +16,7 @@
 
     @media(max-width: 767px) {
         #side_nav {
-            margin-left: -250px;
+            margin-left: -200px;
             position: absolute;
             min-height: 100vh;
             z-index: 1;
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="col-12" ng-repeat="item in $ctrl.items">
-                <a class="btn btn-success w-100 text-start" href="{{item.url}}"  ng-class="{ 'active': $ctrl.helpers.itemIsActive(item.url) }">
+                <a class="btn btn-sm btn-success w-100 text-start" href="{{item.url}}"  ng-class="{ 'active': $ctrl.helpers.itemIsActive(item.url) }">
                     <i class="{{item.icon}}"></i>
                     {{item.title}}
                 </a>
@@ -63,12 +63,14 @@
                         <i class="fa-solid fa-bars fs-3 m-auto"></i>
                     </button>
                     <a class="navbar-brand fs-4" href="#">
-                        <span class="bg-dark rounded px-2 py-0 text-white fw-bold">SISEMP</span>
+                        <span class="bg-dark rounded px-2 py-0 text-white fw-bold ff-lexend">SISEMP</span>
                     </a>
                 </div>
             </div>
         </nav>
 
-        <div class="dashboard-content px-3 pt-4" ng-transclude></div>
+        <div class="px-3 pt-4">
+            <div class="container-lg" ng-transclude></div>
+        </div>
     </div>
 </div>
