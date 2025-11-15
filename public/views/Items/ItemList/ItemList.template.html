@@ -1,56 +1,53 @@
-<div ng-controller="ItemList as ctrl">
+<div ng-controller="ItemList as $ctrl">
     <side-bar>
     <div class="row g-3">
-        <div class="col-12">
-            <div class="d-flex">
-                <button class="btn btn-sm btn-primary shadow-sm ms-auto">
-                    <i class="fa fa-plus"></i>
-                    Novo item
-                </button>
-            </div>
-        </div>
         <div class="col-12">
             <div class="card shadow-sm">
                 <div class="card-header d-flex">
                     Filtros
                     <div class="ms-auto">
-                        <button class="btn py-0 px-1 btn-sm btn-primary">
+                        <button class="btn py-0 px-1 btn-sm btn-primary" ng-click="$ctrl.events.setFilters()">
                             <i class="fa fa-search"></i>
                             Buscar
                         </button>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row gx-2 gy-3">
-                        <div class="col-12 col-md-6 col-lg-3">
+                    <form class="row gx-2 gy-3" name="filtersForm">
+                        <div class="col-12 col-md-4">
                             <label class="form-label">
                                 Identificador
                             </label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="uuid" ng-model="$ctrl.filters.uuid" class="form-control">
                         </div>
-                        <div class="col-12 col-md-6 col-lg-3">
+                        <div class="col-12 col-md-4">
                             <label class="form-label">
                                 Nome
                             </label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="title" ng-model="$ctrl.filters.title" class="form-control">
                         </div>
-                        <div class="col-12 col-md-6 col-lg-3">
+                        <div class="col-12 col-md-4">
                             <label class="form-label">
                                 Categoria
                             </label>
-                            <select class="form-select"></select>
+                            <select class="form-select" name="category" ng-model="$ctrl.filters.category">
+                                <option value=""></option>
+                                <option ng-repeat="(key, value) in $ctrl.categories" value="{{key}}">
+                                    {{value.title}}
+                                </option>
+                            </select>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <div class="col-12">
             <div class="card shadow-sm">
                 <div class="card-body table-relative">
-                    {{$ctrl.message}}
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th>Identificador</th>
                                 <th>Nome</th>
                                 <th>Descrição</th>
                                 <th>Categoria</th>
@@ -58,16 +55,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="item in ctrl.items">
+                            <tr ng-repeat="item in $ctrl.items">
+                                <td>{{item.uuid}}</td>
                                 <td>{{item.title}}</td>
                                 <td>{{item.description}}</td>
                                 <td>
-                                    <span class="badge bg-gradient shadow-sm text-bg-{{ ctrl.categories[item.category].color }}">
-                                        {{ ctrl.categories[item.category].title }}
+                                    <span class="badge bg-gradient shadow-sm text-bg-{{ $ctrl.categories[item.category].color }}">
+                                        {{ $ctrl.categories[item.category].title }}
                                     </span>
                                 </td>
                                 <td>
-                                    {{ ctrl.helpers.getPriceValue(item.price)}}
+                                    {{ $ctrl.helpers.getPriceValue(item.price)}}
                                 </td>
                             </tr>
                         </tbody>

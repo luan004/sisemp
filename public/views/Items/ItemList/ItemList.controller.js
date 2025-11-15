@@ -1,6 +1,12 @@
 angular.module('App').controller('ItemList', function () {
     const $ctrl = this
 
+    $ctrl.filters = {
+        uuid: null,
+        title: null,
+        category: null
+    }
+
     $ctrl.categories = {
         ELETRONIC: {
             title: "Eletrônicos",
@@ -24,7 +30,27 @@ angular.module('App').controller('ItemList', function () {
         getPriceValue: (value) => new Intl.NumberFormat("pt-BR", { style: 'currency', currency: "BRL" }).format(value)
     }
 
-    $ctrl.items = [
+    $ctrl.events = {
+        setFilters: () => {
+            let items = $ctrl.defaultItems
+
+            if ($ctrl.filters.uuid) {
+                items = items.filter((i) => i.uuid.includes($ctrl.filters.uuid))
+            }
+
+            if ($ctrl.filters.title && $ctrl.filters.title !== '') {
+                items = items.filter((i) => i.title.toLowerCase().includes($ctrl.filters.title.toLowerCase()))
+            }
+
+            if ($ctrl.filters.category && $ctrl.filters.category !== '') {
+                items = items.filter((i) => i.category == $ctrl.filters.category)
+            }
+
+            $ctrl.items = items
+        }
+    }
+
+    $ctrl.defaultItems = [
         {
             uuid: "1a1b2411-f896-4fca-b27f-1d776cef8a01",
             title: "Calculadora Científica",
@@ -161,4 +187,5 @@ angular.module('App').controller('ItemList', function () {
         }
     ];
 
+    $ctrl.items = $ctrl.defaultItems
 });
