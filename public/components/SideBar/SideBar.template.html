@@ -39,7 +39,7 @@
 
 <div class="main-container d-flex">
     <div class="sidebar bg-dark shadow p-3" ng-class="{ 'active': $ctrl.states.isActive }" id="side_nav">
-        <div class="row g-2">
+        <div class="row g-2 d-flex">
             <div class="col-12 sidebar-hide-btn-2">
                 <div class="d-flex" ng-click="$ctrl.states.isActive = false">
                     <button class="ms-auto btn btn-secondary text-start">
@@ -48,10 +48,25 @@
                 </div>
             </div>
             <div class="col-12" ng-repeat="item in $ctrl.items">
-                <a class="btn btn-sm btn-success w-100 text-start" href="{{item.url}}"  ng-class="{ 'active': $ctrl.helpers.itemIsActive(item.url) }">
+                <a ng-if="!item.items" class="btn btn-sm btn-success w-100 text-start" href="{{item.url}}">
                     <i class="{{item.icon}}"></i>
                     {{item.title}}
                 </a>
+                <div ng-if="item.items" class="rounded overflow-hidden">
+                    <button class="btn gap-1 d-flex align-items-center btn-sm text-bg-success w-100 mb-1 text-start" data-bs-toggle="collapse" href="#item-collapse-{{$index}}">
+                        <i ng-if="item.icon" class="{{item.icon}}"></i>
+                        {{item.title}}
+                        <i class="ms-auto fa fa-chevron-down opacity-75" style="font-size: 12px;"></i>
+                    </button>
+                    <div class="row g-1 collapse" id="item-collapse-{{$index}}">
+                        <div class="col-12" ng-repeat="subitem in item.items">
+                            <a class="btn btn-sm w-100 text-bg-success text-start bg-success bg-opacity-50" href="{{subitem.url}}">
+                                <i ng-if="subitem.icon" class="{{subitem.icon}}"></i>
+                                {{subitem.title}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
