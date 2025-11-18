@@ -1,53 +1,110 @@
-<div ng-controller="LoginController as ctrl" class="h-100">
+<div ng-controller="LoginController as ctrl" class="h-100 bg-body-tertiary">
     <div class="d-flex h-100">
         <div class="row w-100 m-0">
-            <div class="col-6 d-none d-flex d-lg-block bg-success bg-gradient">
-                <div class="h-100 d-flex">
-                    <span class="m-auto fs-1 bg-dark rounded-3 shadow bg-gradient px-2 py-0 text-white fw-bold">
+
+            <div class="col-6 d-none d-lg-flex bg-success bg-gradient">
+                <div class="m-auto">
+                    <span class="fs-1 bg-dark rounded-3 shadow px-3 py-1 text-white fw-bold">
                         SISEMP
                     </span>
                 </div>
             </div>
-            <div class="col-lg-6 d-flex bg-body-tertiary">
-                <div class="m-auto">
-                    <form name="loginForm" ng-submit="ctrl.submit()">
-                        <div class="row g-3 m-4" style="max-width: 400px;">
-                            <div class="col-12">
-                                <h5>
-                                    Entrar
-                                </h5>
+
+            <div class="col-lg-6 d-flex">
+                <div class="m-auto" style="max-width: 400px; width: 100%;">
+
+                    <div class="alert alert-success py-2 small"
+                         ng-if="ctrl.states.recoverSuccess">
+                        Instruções enviadas para o seu e-mail.
+                    </div>
+
+                    <div ng-if="!ctrl.states.recoverMode">
+
+                        <form name="loginForm" ng-submit="ctrl.submit()">
+
+                            <h5 class="mb-3">Entrar</h5>
+
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control shadow-sm"
+                                       placeholder=""
+                                       ng-model="ctrl.form.username"
+                                       name="username" ng-required="true">
+                                <label>Usuário</label>
                             </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <input type="text" ng-required="true" name="username" ng-model="ctrl.form.username" class="form-control shadow-sm" placeholder="">
-                                    <label>Usuário</label>
-                                </div>  
+
+                            <div class="form-floating mb-2">
+                                <input type="password" class="form-control shadow-sm"
+                                       placeholder=""
+                                       ng-model="ctrl.form.password"
+                                       name="password" ng-required="true">
+                                <label>Senha</label>
                             </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <input type="password" ng-required="true" name="password" ng-model="ctrl.form.password" class="form-control shadow-sm" placeholder="">
-                                    <label>Senha</label>
-                                </div>
+
+                            <div class="text-end mb-3">
+                                <a href="" class="small opacity-75"
+                                   ng-click="ctrl.states.recoverMode = true">
+                                    Esqueceu a senha?
+                                </a>
                             </div>
-                            <div class="col-12">
-                                <input type="submit" class="btn py-2 bg-gradient btn-success w-100 shadow-sm border border-dark border-opacity-25" ng-disabled="loginForm.$invalid" ng-class="{
-                                    'is-invalid': ctrl.states.isFailed,
-                                    'zoom-hover': !loginForm.$invalid
-                                }">
-                                <span class="invalid-feedback">O usuário ou senha estão incorretos.</span>
+
+                            <button type="submit"
+                                    class="btn btn-success bg-gradient w-100 py-2 shadow-sm border border-dark border-opacity-25"
+                                    ng-disabled="loginForm.$invalid">
+                                Entrar
+                            </button>
+
+                            <div class="text-center fw-bold opacity-75 small my-3">OU</div>
+
+                            <button class="btn btn-secondary w-100 py-2 shadow-sm border border-dark border-opacity-25">
+                                Entrar com o SUAP
+                            </button>
+
+                            <div class="text-danger small mt-2"
+                                 ng-if="ctrl.states.isFailed">
+                                Usuário ou senha incorretos.
                             </div>
-                            <div class="col-12 d-flex">
-                                <span class="mx-auto fw-bold opacity-75 py-1 small">OU</span>
+
+                        </form>
+                    </div>
+
+
+                    <div ng-if="ctrl.states.recoverMode">
+
+                        <form name="recoverForm" ng-submit="ctrl.recover()">
+
+                            <h5 class="mb-3">Recuperar senha</h5>
+
+                            <p class="small opacity-75 mb-3">
+                                Informe seu e-mail institucional para receber as instruções.
+                            </p>
+
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control shadow-sm"
+                                       placeholder=""
+                                       ng-model="ctrl.recoverEmail"
+                                       name="email" ng-required="true">
+                                <label>E-mail</label>
                             </div>
-                            <div class="col-12">
-                                <button ng-disabled="false" class="zoom-hover btn btn-secondary py-2 bg-gradient w-100 shadow-sm border border-dark border-opacity-25" ng-disabled="loginForm.$invalid">
-                                    Entrar com o SUAP
-                                </button>
+
+                            <button type="submit"
+                                    class="btn btn-success bg-gradient w-100 py-2 shadow-sm border border-dark border-opacity-25"
+                                    ng-disabled="recoverForm.$invalid">
+                                Enviar
+                            </button>
+
+                            <div class="text-center mt-3">
+                                <a href="" class="small opacity-75"
+                                   ng-click="ctrl.backToLogin()">
+                                    Voltar ao login
+                                </a>
                             </div>
-                        </div>
-                    </form>
+
+                        </form>
+                    </div>
+
                 </div>
             </div>
+
         </div>
     </div>
 </div>
