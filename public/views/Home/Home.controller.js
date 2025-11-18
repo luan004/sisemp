@@ -2,6 +2,27 @@ angular.module('App').controller('HomeController', function () {
 
     const $ctrl = this
 
+    $ctrl.cards = [
+        {
+            title: "Alunos",
+            color: "primary",
+            icon: "fa fa-users",
+            url: "/alunos"
+        },
+        {
+            title: "Materiais",
+            color: "success",
+            icon: "fa-solid fa-boxes-stacked",
+            url: "/items"
+        },
+        {
+            title: "Empréstimos",
+            color: "danger",
+            icon: "fa fa-handshake",
+            url: "/loans"
+        }
+    ]
+
     $ctrl.status = {
         DEVOLVIDO: {
             title: "Devolvido",

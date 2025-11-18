@@ -8,7 +8,8 @@ angular.module('App').component('sideBar', {
         var $ctrl = this;
 
         $ctrl.states = {
-            isActive: false
+            isActive: false,
+            showNotification: false
         }
 
         $ctrl.items = [
@@ -23,15 +24,20 @@ angular.module('App').component('sideBar', {
                 icon: "fa fa-user"
             },
             {
+                title: "Alunos",
+                icon: "fa fa-users",
+                url: "/alunos"
+            },
+            {
                 title: "Materiais",
                 icon: "fa fa-box",
                 items: [
                     {
-                        title:  "Listagem",
+                        title:  "Listar Materiais",
                         url: "/items"
                     },
                     {
-                        title:  "Cadastro",
+                        title:  "Cadastrar Material",
                         url: "/items/new"
                     }
                 ]
@@ -41,7 +47,7 @@ angular.module('App').component('sideBar', {
                 icon: "fa fa-handshake",
                 items: [
                     {
-                        title: "Listagem",
+                        title: "Listar Empréstimo",
                         url: "/loans"
                     },
                     {
@@ -52,7 +58,7 @@ angular.module('App').component('sideBar', {
             },
             {
                 title: "Sair",
-                icon: "fa fa-logout",
+                icon: "fa-solid fa-right-from-bracket",
                 url: "/login"
             }
         ];

@@ -73,13 +73,30 @@
     <div class="content" style="min-height: 100vh; width: 100%;">
         <nav class="navbar bg-success bg-gradient border-bottom border-opacity-25 border-dark shadow">
             <div class="container-fluid">
-                <div class="d-flex">
+                <div class="d-flex w-100 position-relative">
                     <button class="sidebar-hide-btn btn rounded-circle" ng-click="$ctrl.states.isActive = true">
                         <i class="fa-solid fa-bars fs-3 m-auto"></i>
                     </button>
                     <a class="navbar-brand fs-4" href="#">
                         <span class="bg-dark rounded px-2 py-0 text-white fw-bold ff-lexend">SISEMP</span>
                     </a>
+                    <div class="ms-auto d-flex">
+                        <div class="my-auto">
+                            <button class="btn btn-sm bg-dark text-white bg-opacity-50">
+                                <i class="fa fa-bell"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="end-0 top-100 z-3 rounded border border-dark border-opacity-25 shadow-lg position-absolute bg-success p-2" style="width: 200px;">
+                        <div class="row g-3">
+                            <div class="col">
+                                <div class="bg-dark bg-opacity-50 p-3 border rounded border-dark border-opacity-25 text-white d-flex align-items-center gap-2">
+                                    <i class="fa fa-clock"></i>
+                                    <span>Há empréstimos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>

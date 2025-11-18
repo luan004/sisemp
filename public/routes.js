@@ -39,5 +39,10 @@ const routes = [
     route: "/loans",
     view: "EmprestimoList",
     title: "SISEMP - Empréstimos"
+  },
+  {
+    route: "/alunos",
+    view: "AlunosList",
+    title: "SISEMP - Alunos"
   }
 ];
