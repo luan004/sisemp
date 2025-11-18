@@ -24,31 +24,53 @@ angular.module('App').controller('ItemList', function () {
             title: "Outros",
             color: "secondary"
         }
-    }
+    };
 
     $ctrl.helpers = {
-        getPriceValue: (value) => new Intl.NumberFormat("pt-BR", { style: 'currency', currency: "BRL" }).format(value)
-    }
+        getPriceValue: (value) =>
+            new Intl.NumberFormat("pt-BR", { style: 'currency', currency: "BRL" }).format(value)
+    };
+
+    $ctrl.editForm = {};
 
     $ctrl.events = {
         setFilters: () => {
-            let items = $ctrl.defaultItems
+            let items = $ctrl.defaultItems;
 
             if ($ctrl.filters.uuid) {
-                items = items.filter((i) => i.uuid.includes($ctrl.filters.uuid))
+                items = items.filter((i) => i.uuid.includes($ctrl.filters.uuid));
             }
 
             if ($ctrl.filters.title && $ctrl.filters.title !== '') {
-                items = items.filter((i) => i.title.toLowerCase().includes($ctrl.filters.title.toLowerCase()))
+                items = items.filter((i) =>
+                    i.title.toLowerCase().includes($ctrl.filters.title.toLowerCase())
+                );
             }
 
             if ($ctrl.filters.category && $ctrl.filters.category !== '') {
-                items = items.filter((i) => i.category == $ctrl.filters.category)
+                items = items.filter((i) => i.category === $ctrl.filters.category);
             }
 
-            $ctrl.items = items
+            $ctrl.items = items;
+        },
+
+        openModal: (item) => {
+            $ctrl.editForm = angular.copy(item);
+            const modal = new bootstrap.Modal(document.getElementById("editModal"));
+            modal.show();
+        },
+
+        saveEdit: () => {
+            const index = $ctrl.items.findIndex(i => i.uuid === $ctrl.editForm.uuid);
+
+            if (index >= 0) {
+                $ctrl.items[index] = angular.copy($ctrl.editForm);
+            }
+
+            const modal = bootstrap.Modal.getInstance(document.getElementById("editModal"));
+            modal.hide();
         }
-    }
+    };
 
     $ctrl.defaultItems = [
         {
@@ -187,5 +209,5 @@ angular.module('App').controller('ItemList', function () {
         }
     ];
 
-    $ctrl.items = $ctrl.defaultItems
+    $ctrl.items = $ctrl.defaultItems;
 });
