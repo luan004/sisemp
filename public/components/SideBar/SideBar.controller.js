@@ -32,9 +32,28 @@ angular.module('App').component('sideBar', {
                     },
                     {
                         title:  "Cadastro",
-                        url: "/cadastro-material"
+                        url: "/items/new"
                     }
                 ]
+            },
+            {
+                title: "Emprestimos",
+                icon: "fa fa-handshake",
+                items: [
+                    {
+                        title: "Listagem",
+                        url: "/loans"
+                    },
+                    {
+                        title: "Realizar empréstimo",
+                        url: "/loans/new"
+                    }
+                ]
+            },
+            {
+                title: "Sair",
+                icon: "fa fa-logout",
+                url: "/login"
             }
         ];
 

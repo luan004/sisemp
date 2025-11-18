@@ -1,0 +1,138 @@
+<div ng-controller="EmprestimoList as $ctrl">
+    <side-bar>
+        <div class="row g-3">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-header d-flex">
+                        Filtros
+                        <div class="ms-auto">
+                            <button class="btn py-0 px-1 btn-sm btn-primary" ng-click="$ctrl.events.setFilters()">
+                                <i class="fa fa-search"></i>
+                                Buscar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class="row gx-2 gy-3" name="filtersForm">
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">
+                                    Nome
+                                </label>
+                                <input type="text" name="aluno" ng-model="$ctrl.filters.aluno" class="form-control">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">
+                                    Status
+                                </label>
+                                <select class="form-select" name="status" ng-model="$ctrl.filters.status">
+                                    <option value=""></option>
+                                    <option ng-repeat="(key, value) in $ctrl.status" value="{{key}}">
+                                        {{value.title}}
+                                    </option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body table-relative">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Aluno</th>
+                                <th>Material</th>
+                                <th>Quantidade</th>
+                                <th>Data de Empréstimo</th>
+                                <th>Data de Devolução</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in $ctrl.items">
+                                <td>{{item.aluno}}</td>
+                                <td>{{item.item}}</td>
+                                <td>{{item.count}}</td>
+                                <td>{{item.dataInicio}}</td>
+                                <td>{{item.dataFim}}</td>
+                                <td>
+                                    <span class="badge bg-gradient shadow-sm text-bg-{{ $ctrl.status[item.status].color || 'secondary' }}">
+                                        {{ $ctrl.status[item.status].title || item.status }}
+                                    </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL DE EDIÇÃO -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-warning bg-gradient">
+                        <h5 class="modal-title">
+                            <i class="fa fa-edit me-2"></i>
+                            Editar Item
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">
+                                <i class="fa fa-barcode me-1"></i>
+                                Identificador
+                            </label>
+                            <input type="text" class="form-control bg-light" ng-model="$ctrl.editForm.uuid" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">
+                                <i class="fa fa-tag me-1"></i>
+                                Nome
+                            </label>
+                            <input type="text" class="form-control" ng-model="$ctrl.editForm.title" placeholder="Digite o nome">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">
+                                <i class="fa fa-align-left me-1"></i>
+                                Descrição
+                            </label>
+                            <textarea class="form-control" ng-model="$ctrl.editForm.description" rows="3" placeholder="Digite a descrição"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">
+                                <i class="fa fa-list me-1"></i>
+                                Categoria
+                            </label>
+                            <select class="form-select" ng-model="$ctrl.editForm.category">
+                                <option ng-repeat="(key, value) in $ctrl.categories" value="{{key}}">
+                                    {{value.title}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">
+                                <i class="fa fa-dollar-sign me-1"></i>
+                                Valor (R$)
+                            </label>
+                            <input type="number" step="0.01" class="form-control" ng-model="$ctrl.editForm.price" placeholder="0.00">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="fa fa-times me-1"></i>
+                            Cancelar
+                        </button>
+                        <button type="button" class="btn btn-success" ng-click="$ctrl.events.saveEdit()">
+                            <i class="fa fa-check me-1"></i>
+                            Salvar Alterações
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </side-bar>
+</div>

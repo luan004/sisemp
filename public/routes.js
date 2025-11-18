@@ -2,13 +2,13 @@ const routes = [
   {
     route: "/",
     view: "Home",
-    title: "Home",
+    title: "SISEMP - Home",
     icon: "fa fa-home",
   },
   {
     route: "/login",
     view: "Login",
-    title: "Login",
+    title: "SISEMP - Login",
   },
   {
     route: "/login/:id",
@@ -18,16 +18,26 @@ const routes = [
   {
     route: "/profile",
     view: "Profile",
-    title: "Profile",
+    title: "SISEMP - Perfil",
   },
   {
-    route: "/cadastro-material",
+    route: "/items/new",
     view: "CadastroMaterial",
-    title: "CadastroMaterial"
+    title: "SISEMP - Cadastrar Material"
   },
   {
     route: "/items",
     view: "Items/ItemList",
-    title: "SISEMP - Items"
+    title: "SISEMP - Materiais"
+  },
+  {
+    route: "/loans/new",
+    view: "Emprestimo",
+    title: "SISEMP - Registar Empréstimo"
+  },
+  {
+    route: "/loans",
+    view: "EmprestimoList",
+    title: "SISEMP - Empréstimos"
   }
 ];

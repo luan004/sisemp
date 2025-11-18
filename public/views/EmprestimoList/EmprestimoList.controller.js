@@ -1,6 +1,10 @@
-angular.module('App').controller('HomeController', function () {
-
+angular.module('App').controller('EmprestimoList', function () {
     const $ctrl = this
+
+    $ctrl.filters = {
+        aluno: null,
+        status: null
+    }
 
     $ctrl.status = {
         DEVOLVIDO: {
@@ -17,7 +21,49 @@ angular.module('App').controller('HomeController', function () {
         }
     };
 
-    $ctrl.items = [
+    $ctrl.helpers = {
+        getPriceValue: (value) =>
+            new Intl.NumberFormat("pt-BR", { style: 'currency', currency: "BRL" }).format(value)
+    };
+
+    $ctrl.editForm = {};
+
+    $ctrl.events = {
+        setFilters: () => {
+            let items = $ctrl.defaultItems;
+
+            if ($ctrl.filters.aluno && $ctrl.filters.aluno !== '') {
+                items = items.filter((i) =>
+                    i.aluno.toLowerCase().includes($ctrl.filters.aluno.toLowerCase())
+                );
+            }
+
+            if ($ctrl.filters.status && $ctrl.filters.status !== '') {
+                items = items.filter((i) => i.status === $ctrl.filters.status);
+            }
+
+            $ctrl.items = items;
+        },
+
+        openModal: (item) => {
+            $ctrl.editForm = angular.copy(item);
+            const modal = new bootstrap.Modal(document.getElementById("editModal"));
+            modal.show();
+        },
+
+        saveEdit: () => {
+            const index = $ctrl.items.findIndex(i => i.uuid === $ctrl.editForm.uuid);
+
+            if (index >= 0) {
+                $ctrl.items[index] = angular.copy($ctrl.editForm);
+            }
+
+            const modal = bootstrap.Modal.getInstance(document.getElementById("editModal"));
+            modal.hide();
+        }
+    };
+
+    $ctrl.defaultItems = [
         {
             aluno: "Gabriel da Silva",
             item: "Bola de Vôlei",
@@ -75,4 +121,6 @@ angular.module('App').controller('HomeController', function () {
             status: "NAO_DEVOLVIDO"
         }
     ];
+    
+    $ctrl.items = $ctrl.defaultItems;
 });

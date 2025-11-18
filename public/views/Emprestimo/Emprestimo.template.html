@@ -1,0 +1,192 @@
+<div ng-controller="EmprestimoController as ctrl" class="h-100 bg-body-tertiary">
+    <side-bar>
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-8">
+                <!-- Alerta de Sucesso -->
+                <div ng-show="ctrl.states.emprestimoSucesso" class="alert alert-success alert-dismissible fade show shadow-sm mb-3" role="alert">
+                    <strong>Sucesso!</strong> Empréstimo registrado com sucesso.
+                    <button type="button" class="btn-close" ng-click="ctrl.states.emprestimoSucesso = false"></button>
+                </div>
+
+                <!-- Alerta de Erro -->
+                <div ng-show="ctrl.states.erro" class="alert alert-danger alert-dismissible fade show shadow-sm mb-3" role="alert">
+                    <strong>Erro!</strong> {{ctrl.mensagemErro}}
+                    <button type="button" class="btn-close" ng-click="ctrl.states.erro = false"></button>
+                </div>
+
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0">
+                                <i class="fa fa-handshake me-2"></i>
+                                Registrar Empréstimo
+                            </h5>
+                        </div>
+                        
+                        <form name="emprestimoForm" ng-submit="ctrl.submit()">
+                            <div class="row g-3">
+                                <!-- DADOS DO ALUNO -->
+                                <div class="col-12">
+                                    <h6 class="text-primary mb-3">
+                                        <i class="fa fa-user me-2"></i>
+                                        Dados do Aluno
+                                    </h6>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" ng-required="true" name="nomeAluno" ng-model="ctrl.form.nomeAluno" class="form-control" placeholder="">
+                                        <label>Nome Completo do Aluno</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+    <div class="form-floating">
+        <input type="text" ng-required="true" name="curso" ng-model="ctrl.form.curso" class="form-control" placeholder="">
+        <label>Curso</label>
+    </div>
+</div>
+
+                                <div class="col-md-3">
+                                    <div class="form-floating">
+                                        <select ng-required="true" name="serie" ng-model="ctrl.form.serie" class="form-select">
+                                            <option value="">Selecione...</option>
+                                            <option value="1">1ª Série</option>
+                                            <option value="2">2ª Série</option>
+                                            <option value="3">3ª Série</option>
+                                            <option value="4">4ª Série</option>
+                                        </select>
+                                        <label>Série</label>
+                                    </div>
+                                </div>
+
+                                <!-- MATERIAL -->
+                                <div class="col-12 mt-4">
+                                    <h6 class="text-primary mb-3">
+                                        <i class="fa fa-box me-2"></i>
+                                        Material para Empréstimo
+                                    </h6>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-floating">
+                                        <select ng-required="true" name="material" ng-model="ctrl.form.materialId" ng-change="ctrl.selecionarMaterial()" class="form-select">
+                                            <option value="">Selecione o material...</option>
+                                            <option ng-repeat="item in ctrl.materiais" value="{{item.uuid}}">
+                                                {{item.uuid}} - {{item.title}} ({{ctrl.categories[item.category].title}})
+                                            </option>
+                                        </select>
+                                        <label>Material</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-floating">
+                                        <input type="number" ng-required="true" name="quantidade" ng-model="ctrl.form.quantidade" class="form-control" placeholder="" min="1" ng-max="ctrl.quantidadeDisponivel">
+                                        <label>Quantidade</label>
+                                    </div>
+                                    <small class="text-muted" ng-if="ctrl.materialSelecionado">
+                                        Disponível: {{ctrl.quantidadeDisponivel}} unidade(s)
+                                    </small>
+                                </div>
+
+                                <!-- Detalhes do Material Selecionado -->
+                                <div class="col-12" ng-if="ctrl.materialSelecionado">
+                                    <div class="alert alert-info d-flex align-items-center">
+                                        <i class="fa fa-info-circle fa-2x me-3"></i>
+                                        <div>
+                                            <strong>{{ctrl.materialSelecionado.title}}</strong><br>
+                                            <small>{{ctrl.materialSelecionado.description}}</small><br>
+                                            <span class="badge bg-{{ctrl.categories[ctrl.materialSelecionado.category].color}} mt-1">
+                                                {{ctrl.categories[ctrl.materialSelecionado.category].title}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- DATA E HORA -->
+                                <div class="col-12 mt-4">
+                                    <h6 class="text-primary mb-3">
+                                        <i class="fa fa-calendar me-2"></i>
+                                        Período do Empréstimo
+                                    </h6>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Data e Hora do Empréstimo</label>
+                                    <div class="row g-2">
+                                        <div class="col-7">
+                                            <input type="date" ng-required="true" name="dataEmprestimo" ng-model="ctrl.form.dataEmprestimo" class="form-control">
+                                        </div>
+                                        <div class="col-5">
+                                            <input type="time" ng-required="true" name="horaEmprestimo" ng-model="ctrl.form.horaEmprestimo" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Data e Hora da Devolução</label>
+                                    <div class="row g-2">
+                                        <div class="col-7">
+                                            <input type="date" ng-required="true" name="dataDevolucao" ng-model="ctrl.form.dataDevolucao" class="form-control" ng-min="ctrl.form.dataEmprestimo">
+                                        </div>
+                                        <div class="col-5">
+                                            <input type="time" ng-required="true" name="horaDevolucao" ng-model="ctrl.form.horaDevolucao" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- OBSERVAÇÕES -->
+                                <div class="col-12 mt-3">
+                                    <div class="form-floating">
+                                        <textarea name="observacoes" ng-model="ctrl.form.observacoes" class="form-control" placeholder="" style="height: 80px;"></textarea>
+                                        <label>Observações (opcional)</label>
+                                    </div>
+                                </div>
+
+                                <!-- BOTÕES -->
+                                <div class="col-12 mt-4">
+                                    <div class="d-flex gap-2">
+                                        <button type="submit" class="btn btn-primary flex-fill" ng-disabled="emprestimoForm.$invalid || ctrl.states.salvando">
+                                            <span ng-hide="ctrl.states.salvando">
+                                                <i class="fa fa-check me-1"></i> Registrar Empréstimo
+                                            </span>
+                                            <span ng-show="ctrl.states.salvando">
+                                                <span class="spinner-border spinner-border-sm me-1"></span> Salvando...
+                                            </span>
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" ng-click="ctrl.limparFormulario()">
+                                            <i class="fa fa-times me-1"></i> Limpar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Card de Resumo -->
+                <div class="card shadow-sm border-0 mt-3" ng-if="ctrl.materialSelecionado">
+                    <div class="card-header bg-light">
+                        <h6 class="mb-0">
+                            <i class="fa fa-clipboard-list me-2"></i>
+                            Resumo do Empréstimo
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="mb-2"><strong>Aluno:</strong> {{ctrl.form.nomeAluno || '-'}}</p>
+                                <p class="mb-2"><strong>Curso/Série:</strong> {{ctrl.form.curso || '-'}} - {{ctrl.form.serie}}ª Série</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-2"><strong>Material:</strong> {{ctrl.materialSelecionado.title}}</p>
+                                <p class="mb-2"><strong>Quantidade:</strong> {{ctrl.form.quantidade || 0}} unidade(s)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </side-bar>
+</div>

@@ -58,7 +58,7 @@
                         {{item.title}}
                         <i class="ms-auto fa fa-chevron-down opacity-75" style="font-size: 12px;"></i>
                     </button>
-                    <div class="row g-1 collapse" id="item-collapse-{{$index}}">
+                    <div class="row g-1 collapse show" id="item-collapse-{{$index}}">
                         <div class="col-12" ng-repeat="subitem in item.items">
                             <a class="btn btn-sm w-100 text-bg-success text-start bg-success bg-opacity-50" href="{{subitem.url}}">
                                 <i ng-if="subitem.icon" class="{{subitem.icon}}"></i>
