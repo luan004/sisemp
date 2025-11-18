@@ -1,10 +1,10 @@
 angular
   .module("App")
-  .controller("ProfileController", function ($location, $window) {
+  .controller("ProfileController", function ($location, $window, $timeout) {
     this.user = {
-      name: "João Silva Santos",
-      email: "joao.silva@email.com",
-      ra: "123456789",
+      name: "Tayná Vicente Silva",
+      email: "20241PVAI10030034@estudantes.ifpr.edu.br",
+      ra: "20241PVAI10030034",
     };
 
     this.states = {
@@ -37,17 +37,22 @@ angular
     };
 
     this.saveProfile = function () {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailRegex.test(this.editForm.email)) {
+        alert("Por favor, informe um e-mail válido.");
+        return;
+      }
+
       this.states.isSaving = true;
 
-      setTimeout(() => {
+      $timeout(() => {
         this.user.name = this.editForm.name;
         this.user.email = this.editForm.email;
         this.user.ra = this.editForm.ra;
 
         this.states.isSaving = false;
         this.states.isEditing = false;
-
-        this.$apply();
       }, 500);
     };
 
@@ -56,10 +61,4 @@ angular
         $location.url("/login");
       }
     };
-
-    this.$apply = function () {
-      if (!this.$scope.$$phase) {
-        this.$scope.$apply();
-      }
-    }.bind(this);
   });
